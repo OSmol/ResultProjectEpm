@@ -1,7 +1,8 @@
 package by.javatr.result.runner;
 
 import by.javatr.result.bean.Book;
-import by.javatr.result.entity.Menu;
+import by.javatr.result.bean.User;
+import by.javatr.result.util.Menu;
 
 import java.util.List;
 
@@ -32,17 +33,30 @@ public class Printer {
 
     public static void printBooks(List<Book> list, boolean isAdmin) {
         for (Book book : list) {
-            if (isAdmin) {
-                System.out.println(book.getId());
-            }
-            System.out.print(book.getAuthorName() + " ");
-            System.out.println(book.getAuthorSurname());
-            System.out.println(book.getYear());
-            System.out.println(book.getBookName());
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println(book.getDescription() + "\n");
+            if (isAdmin) {
+                System.out.println("id: "+book.getId());
+            }
+            System.out.print("author name: "+book.getAuthorName() + " ");
+            System.out.println("author surname: "+book.getAuthorSurname());
+            System.out.println("book year: "+book.getYear());
+            System.out.println("book name: "+book.getBookName());
+            System.out.println("description: \n"+book.getDescription() + "\n");
 
         }
     }
 
+    public static void printUsers(List<User> list) {
+        for (User user : list) {
+            System.out.println("id: "+user.getId());
+            System.out.println("name: "+user.getName() + " ");
+            System.out.println("login: "+user.getLogin());
+            System.out.println("year: "+user.getYear());
+            System.out.println("status: "+user.getStatus());
+            System.out.println("role: "+user.getRole() + "\n");
+
+        }
+    }
 }
+
+

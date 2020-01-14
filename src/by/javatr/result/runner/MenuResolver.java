@@ -1,8 +1,11 @@
 package by.javatr.result.runner;
 
-import by.javatr.result.entity.Status;
+import by.javatr.result.bean.Book;
 import by.javatr.result.bean.User;
-import by.javatr.result.entity.*;
+import by.javatr.result.util.*;
+import by.javatr.result.util.action.AdminAction;
+import by.javatr.result.util.action.StartAction;
+import by.javatr.result.util.action.UserAction;
 import by.javatr.result.exception.NoSuchActionExeption;
 import by.javatr.result.exception.service.ServiceException;
 import by.javatr.result.exception.view.ImpossibleActionException;
@@ -12,26 +15,28 @@ import by.javatr.result.service.ClientService;
 import by.javatr.result.service.LibraryService;
 import by.javatr.result.service.impl.ClientServiceImpl;
 
+import java.util.List;
+
 public class MenuResolver {
 
     private static ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static ClientService clientService = serviceFactory.getClientService();
     private static LibraryService libraryService = serviceFactory.getLibraryService();
 
-    private static final Menu userMenu = new Menu(2, UserAction.values());
-    private static final Menu adminMenu = new Menu(3, AdminAction.values());
-    private static final Menu startMenu = new Menu(4, StartAction.values());
+    private static final Menu userMenu = new Menu(UserAction.values());
+    private static final Menu adminMenu = new Menu(AdminAction.values());
+    private static final Menu startMenu = new Menu(StartAction.values());
 
 
     public static Menu getStartMenu() {
 
-        return new Menu(3, StartAction.values());
+        return startMenu;
     }
 
 
     public static User registration() throws ImpossibleActionException {
 
-        User user;
+        User user = null;
         String name;
         String login;
         String password;
@@ -43,20 +48,20 @@ public class MenuResolver {
         login = DataScanner.enterStringFromConsole();
         System.out.println("Введите пароль.");
         password = DataScanner.enterStringFromConsole();
-        System.out.println("Введите возраст");
+        System.out.println("Введите год рождения.");
         age = DataScanner.enterIntFromConsole();
 
         try {
             user = clientService.registration(name, login, password, age);
         } catch (ServiceException e) {
-            throw new ImpossibleActionException(e.getMessage());
+            System.out.println("Данные заполнены неверно.");
         }
 
         return user;
     }
 
     private static User signIn() throws ImpossibleActionException {
-        User user;
+        User user = null;
         String login;
         String password;
 
@@ -67,7 +72,7 @@ public class MenuResolver {
         try {
             user = clientService.signIn(login, password);
         } catch (ServiceException e) {
-            throw new ImpossibleActionException(e.getMessage());
+            System.out.println("Неверные данные для входа.");
         }
         return user;
     }
@@ -82,7 +87,8 @@ public class MenuResolver {
             someAction = actionTransformer(action, menu);
             switch (someAction) {
                 case "SIGNIN":
-                    User loggedUser = MenuResolver.signIn();
+                    User loggedUser;
+                    loggedUser = MenuResolver.signIn();
                     Printer.printMenu(getFirstMenu(loggedUser));
                     actionInner = DataScanner.enterIntFromConsole();
                     checkAction(actionInner, loggedUser, getFirstMenu(loggedUser));
@@ -100,7 +106,13 @@ public class MenuResolver {
                     System.out.println("Введите фамилию автора.");
                     String surname;
                     surname = DataScanner.enterStringFromConsole();
-                    Printer.printBooks(libraryService.getBookByAuthorSurname(surname), ClientServiceImpl.isAdmin(user));
+                    try {
+                        List<Book> books = libraryService.getBookByAuthorSurname(surname);
+
+                        Printer.printBooks(books, ClientServiceImpl.isAdmin(user));
+                    } catch (ServiceException ex) {
+                        System.out.println("В каталоге нет такой книги.");
+                    }
                     Printer.printMenu(getFirstMenu(user));
                     actionInner = DataScanner.enterIntFromConsole();
                     checkAction(actionInner, user, menu);
@@ -112,23 +124,13 @@ public class MenuResolver {
                     checkAction(actionInner, user, menu);
                     break;
                 case "ADDBOOK":
-
-                    System.out.println("Введите имя автора:");
-                    String authorName = DataScanner.enterStringFromConsole();
-
-                    System.out.println("Введите фамилию автора:");
-                    String authorSurname = DataScanner.enterStringFromConsole();
-
-                    System.out.println("Введите название книги:");
-                    String bookName = DataScanner.enterStringFromConsole();
-
-                    System.out.println("Введите год публикации книги:");
-                    int year = DataScanner.enterIntFromConsole();
-
-                    System.out.println("Введите краткое описание (450 символов):");
-                    String description = DataScanner.enterStringFromConsole();
-
-                    libraryService.addNewBook(authorName, authorSurname, bookName, year, description);
+                    MenuResolver.addBook();
+                    Printer.printMenu(getFirstMenu(user));
+                    actionInner = DataScanner.enterIntFromConsole();
+                    checkAction(actionInner, user, menu);
+                    break;
+                case "GETUSERS":
+                    Printer.printUsers(clientService.getAllUsers());
                     Printer.printMenu(getFirstMenu(user));
                     actionInner = DataScanner.enterIntFromConsole();
                     checkAction(actionInner, user, menu);
@@ -143,11 +145,22 @@ public class MenuResolver {
                     actionInner = DataScanner.enterIntFromConsole();
                     checkAction(actionInner, user, menu);
                     break;
+                case "REMOVEUSER":
+                    Printer.printUsers(clientService.getAllUsers());
+                    Printer.printMenu(getFirstMenu(user));
+                    System.out.println("Введите id пользователя, которого хотите удалить:");
+                    actionInner = DataScanner.enterIntFromConsole();
+                    clientService.removeUser(actionInner);
+                    Printer.printMenu(getFirstMenu(user));
+                    actionInner = DataScanner.enterIntFromConsole();
+                    checkAction(actionInner, user, menu);
+                    break;
                 default:
+                    getFirstMenu(user);
                     break;
 
             }
-        } catch (ServiceException | NoSuchActionExeption |ImpossibleActionException ex) {
+        } catch (ServiceException | NoSuchActionExeption | ImpossibleActionException ex) {
             System.out.println("Impossible action.");
         }
 
@@ -155,19 +168,15 @@ public class MenuResolver {
 
     public static Menu getFirstMenu(User user) {
 
-        Menu menu;
-
         if (!ClientServiceImpl.isOnline(user)) {
-            menu = new Menu(1, StartAction.values());
+            return startMenu;
         } else {
             if (ClientServiceImpl.isAdmin(user)) {
-                menu = new Menu(3, AdminAction.values());
-
+                return adminMenu;
             } else {
-                menu = new Menu(2, UserAction.values());
+                return userMenu;
             }
         }
-        return menu;
     }
 
 
@@ -180,6 +189,30 @@ public class MenuResolver {
         }
         throw new NoSuchActionExeption("No such action.");
     }
+
+    private static void addBook() {
+        System.out.println("Введите имя автора:");
+        String authorName = DataScanner.enterStringFromConsole();
+
+        System.out.println("Введите фамилию автора:");
+        String authorSurname = DataScanner.enterStringFromConsole();
+
+        System.out.println("Введите название книги:");
+        String bookName = DataScanner.enterStringFromConsole();
+
+        System.out.println("Введите год публикации книги:");
+        int year = DataScanner.enterIntFromConsole();
+
+        System.out.println("Введите краткое описание (450 символов):");
+        String description = DataScanner.enterStringFromConsole();
+
+        try {
+            libraryService.addNewBook(authorName, authorSurname, bookName, year, description);
+        } catch (ServiceException e) {
+            System.out.println("Не удалось добавить книгу.");
+        }
+    }
+
 
 }
 

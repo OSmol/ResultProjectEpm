@@ -1,16 +1,16 @@
 package by.javatr.result.bean;
 
-import by.javatr.result.entity.Recordable;
-import by.javatr.result.entity.Role;
-import by.javatr.result.entity.Status;
+import by.javatr.result.util.Role;
+import by.javatr.result.util.Status;
 
 import java.io.Serializable;
 
-public class User implements Serializable, Recordable {
+public class User implements Serializable {
 
-    private static final long serialVersionUID = -152377095470882697L;
 
-    private int id;
+    private static final long serialVersionUID = -6672256886751595811L;
+
+    private long id;
     private String name;
     private int year;
     private String login;
@@ -21,11 +21,11 @@ public class User implements Serializable, Recordable {
     public User() {
     }
 
-    public final int getId() {
+    public final long getId() {
         return id;
     }
 
-    public final void setId(int id) {
+    public final void setId(long id) {
         this.id = id;
     }
 

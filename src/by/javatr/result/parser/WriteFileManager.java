@@ -1,6 +1,5 @@
 package by.javatr.result.parser;
 
-import by.javatr.result.entity.Recordable;
 import by.javatr.result.exception.FileParserException;
 import com.google.gson.Gson;
 
@@ -12,7 +11,7 @@ public class WriteFileManager {
 
     private static Gson gson = new Gson();
 
-    public static void writeToFile(Recordable obj, File file, boolean append) throws FileParserException {
+    public static void writeToFile(Serializable obj, File file, boolean append) throws FileParserException {
 
         try (FileWriter fileWriter = new FileWriter(file, append)) {
             fileWriter.write(gson.toJson(obj));

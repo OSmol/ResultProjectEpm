@@ -1,7 +1,6 @@
 package by.javatr.result.dao.impl;
 
-import by.javatr.result.entity.Role;
-import by.javatr.result.entity.Status;
+import by.javatr.result.util.Status;
 import by.javatr.result.bean.User;
 import by.javatr.result.dao.UserDAO;
 import by.javatr.result.exception.*;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class FileUserDAO implements UserDAO {
 
-    private final static File FILE = new File("file.jsonl");
+    private final static File FILE = new File("user.jsonl");
 
 
     public User getUserByLogin(String login) throws DAOException {
@@ -35,27 +34,21 @@ public class FileUserDAO implements UserDAO {
         throw new DAOUserNotFoundException("User not found");
     }
 
-    //todo
-    private User getUserById(int id) throws DAOException {
-        List<User> users = getAll();
-        for (User user : users) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
 
-        throw new DAOUserNotFoundException("User not found");
-    }
-
-    //todo
-    private List<User> deleteUserById(int id) throws DAOException {
+    public void removeUserById(int id) throws DAOException {
 
         List<User> users = getAll();
         for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); )
             if (iterator.next().getId() == id) {
                 iterator.remove();
             }
-        return users;
+
+        try {
+            WriteFileManager.writeToFile(users, FILE);
+
+        } catch (FileParserException e) {
+            throw new DAOFileParserException("Writing file caused an error.");
+        }
     }
 
     @Override
@@ -99,8 +92,12 @@ public class FileUserDAO implements UserDAO {
         if (!UserValidator.validateName(user.getName())) {
             throw new DAOUserLogicException("Name is incorrect.");
         }
+        long id = Math.abs(user.hashCode()) + (System.currentTimeMillis() / 10000);
 
-        user.setId(user.hashCode());
+        while (checkExistUserId(id)) {
+            id = Math.abs(user.hashCode()) + (System.currentTimeMillis() / 10000);
+        }
+        user.setId(id);
         user.setStatus(Status.OFFLINE);
 
         try {
@@ -111,55 +108,15 @@ public class FileUserDAO implements UserDAO {
         }
     }
 
-    //todo
-/*
-    @Override
-    public void update(User user) throws DAOException {
-
-        if (!UserValidator.validateYear(user.getYear())) {
-            throw new DAOUserLogicException("Year is incorrect");
-        }
-
-        if (!UserValidator.validateLogin(user.getLogin())) {
-            throw new DAOUserLogicException("Login is incorrect.");
-        }
-
-        if (!UserValidator.validatePassword(user.getPassword())) {
-            throw new DAOUserLogicException("Password is incorrect.");
-        }
-
-        if (!UserValidator.validateName(user.getName())) {
-            throw new DAOUserLogicException("Name is incorrect.");
-        }
-
-        List<User> users = deleteUserById(user.getId());
-        users.add(user);
-
-        try {
-            WriteFileManager.writeToFile(users, FILE);
-        } catch (FileParserException ex) {
-            throw new DAOFileParserException("FileParseException in write method.");
-        }
-
-    }
-
-
- */
-
-    @Override
-    public void delete(User user) throws DAOException {
-
+    private boolean checkExistUserId(long id) throws DAOException {
         List<User> users = getAll();
-        if (users != null) {
-            users.remove(user);
-            try {
-                WriteFileManager.writeToFile(users, FILE);
-            } catch (FileParserException ex) {
-                throw new DAOFileParserException("Reading file caused an error.");
+        for (User user : users) {
+            if (user.getId() == id) {
+                return true;
             }
         }
+        return false;
     }
-
 
 }
 

@@ -1,4 +1,4 @@
-package by.javatr.result.entity;
+package by.javatr.result.util;
 
 public enum Status {
 

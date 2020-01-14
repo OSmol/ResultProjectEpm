@@ -1,17 +1,16 @@
 package by.javatr.result.service.impl;
 
-import by.javatr.result.entity.Role;
-import by.javatr.result.entity.Status;
+import by.javatr.result.util.Role;
+import by.javatr.result.util.Status;
 import by.javatr.result.bean.User;
 import by.javatr.result.dao.UserDAO;
 import by.javatr.result.exception.dao.DAOException;
-import by.javatr.result.exception.service.ServiceException;
-import by.javatr.result.exception.service.ServiceFileWriteException;
-import by.javatr.result.exception.service.ServiceUserLogicException;
-import by.javatr.result.exception.service.ServiceUserNotFoundException;
+import by.javatr.result.exception.service.*;
 import by.javatr.result.factory.DAOFactory;
 import by.javatr.result.service.ClientService;
 import by.javatr.result.validator.UserValidator;
+
+import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
 
@@ -29,7 +28,6 @@ public class ClientServiceImpl implements ClientService {
         if (!UserValidator.validatePassword(password)) {
             throw new ServiceUserLogicException("Password is incorrect");
         }
-
 
         User user;
 
@@ -84,7 +82,25 @@ public class ClientServiceImpl implements ClientService {
             user.setStatus(Status.ONLINE);
             return user;
         } catch (DAOException e) {
-            throw new ServiceFileWriteException("Year is incorrect");
+            throw new ServiceFileWriteException("Writing file caused an error.");
+        }
+    }
+
+    @Override
+    public void removeUser(int id) throws ServiceException {
+        try {
+            userDAO.removeUserById(id);
+        } catch (DAOException e) {
+            throw new ServiceRemoveBookException("Impossible to remove.");
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws ServiceException{
+        try {
+            return userDAO.getAll();
+        } catch (DAOException e) {
+          throw new ServiceEmptyDataException("Empty data.");
         }
     }
 

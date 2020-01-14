@@ -1,14 +1,11 @@
 package by.javatr.result.bean;
 
-import by.javatr.result.entity.Recordable;
-
 import java.io.Serializable;
 
-public class Book implements Serializable, Recordable {
+public class Book implements Serializable {
 
-    private static final long serialVersionUID = -8418897135616311454L;
-
-    private int id;
+    private static final long serialVersionUID = 2391836306763433659L;
+    private long id;
     private String bookName;
     private String authorName;
     private String authorSurname;
@@ -16,14 +13,13 @@ public class Book implements Serializable, Recordable {
     private String description;
 
 
-    public Book() {
-    }
+    public Book() {}
 
-    public final int getId() {
+    public final long getId() {
         return id;
     }
 
-    public final void setId(int id) {
+    public final void setId(long id) {
         this.id = id;
     }
 

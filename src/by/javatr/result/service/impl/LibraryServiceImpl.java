@@ -45,7 +45,7 @@ public class LibraryServiceImpl implements LibraryService {
         try {
             bookDAO.save(book);
         } catch (DAOException ex) {
-            throw new ServiceAddBookException("Impossible to add.");
+            throw new ServiceAddBookException("Writing file caused an error.");
         }
 
     }
@@ -65,7 +65,7 @@ public class LibraryServiceImpl implements LibraryService {
         List<Book> books;
         try {
             books=bookDAO.getBookByAuthorSurname(surname);
-            if(books==null){
+            if(books.size()==0){
               throw new ServiceEmptyDataException("Empty data");
             }
 

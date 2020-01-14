@@ -69,8 +69,13 @@ public class FileBookDAO implements BookDAO {
         if (!BookValidator.bookValidator(book)) {
             throw new DAOBookLogicException("Book has incorrect field");
         }
+        long id = Math.abs(book.hashCode()) + (System.currentTimeMillis() / 10000);
 
-        book.setId(book.hashCode());
+        while (checkExistUserId(id)) {
+            id = Math.abs(book.hashCode()) + (System.currentTimeMillis() / 10000);
+        }
+
+        book.setId(id);
 
         try {
             WriteFileManager.writeToFile(book, FILE, true);
@@ -78,24 +83,6 @@ public class FileBookDAO implements BookDAO {
             throw new DAOFileParserException("Writing file caused an error");
         }
     }
-
-//todo
-  /*  @Override
-    public void update(Book book) throws DAOException {
-
-       if(!BookValidator.bookValidator(book)){
-          throw  new DAOBookLogicException("Book has incorrect field");
-       }
-
-        List<Book> books = deleteBookById(book);
-        books.add(book);
-
-        try {
-            WriteFileManager.writeToFile(books, FILE);
-        } catch (FileParserException ex) {
-            throw new DAOException("FileParseException in write method.");
-        }
-    }*/
 
 
     @Override
@@ -117,5 +104,15 @@ public class FileBookDAO implements BookDAO {
                 throw new DAOFileParserException("Writing file caused an error");
             }
         }
+    }
+
+    private boolean checkExistUserId(long id) throws DAOException {
+        List<Book> books = getAll();
+        for (Book book : books) {
+            if (book.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

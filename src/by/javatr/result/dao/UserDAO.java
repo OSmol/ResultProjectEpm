@@ -11,10 +11,7 @@ public interface UserDAO {
 
     void save(User user) throws DAOException;
 
-    //todo
-  //  void update(User user) throws DAOException;
-
-    void delete(User user) throws DAOException;
+    void removeUserById(int id) throws DAOException;
 
     User getUserByLogin(String login) throws DAOException;
 
