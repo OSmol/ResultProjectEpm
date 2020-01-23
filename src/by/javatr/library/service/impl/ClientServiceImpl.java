@@ -48,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
                 throw new ServiceUserNotFoundException("Such user doesn't exist. Or password is incorrect.");
             }
         } catch (DAOException e) {
-            throw new ServiceUserNotFoundException("Such user doesn't exist. Or password is incorrect.");
+            throw new ServiceUserNotFoundException("Such user doesn't exist. Or password is incorrect.",e);
         }
     }
 
@@ -92,7 +92,7 @@ public class ClientServiceImpl implements ClientService {
             currentUser = user;
             return user;
         } catch (DAOException e) {
-            throw new ServiceFileWriteException("Writing file caused an error.");
+            throw new ServiceFileWriteException("Writing file caused an error.",e);
         }
     }
 
@@ -101,7 +101,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             userDAO.removeUserById(id);
         } catch (DAOException e) {
-            throw new ServiceRemoveBookException("Impossible to remove.");
+            throw new ServiceRemoveBookException("Impossible to remove.",e);
         }
     }
 
@@ -110,7 +110,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             return userDAO.getAll();
         } catch (DAOException e) {
-            throw new ServiceEmptyDataException("Empty data.");
+            throw new ServiceEmptyDataException("Empty data.",e);
         }
     }
 
@@ -121,7 +121,7 @@ public class ClientServiceImpl implements ClientService {
             user= userDAO.getUserById(id);
             return user;
         } catch (DAOException e) {
-            throw new ServiceUserNotFoundException("User not found");
+            throw new ServiceUserNotFoundException("User not found",e);
         }
 
     }

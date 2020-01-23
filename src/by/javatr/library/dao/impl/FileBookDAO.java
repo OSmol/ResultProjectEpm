@@ -5,7 +5,7 @@ import by.javatr.library.dao.BookDAO;
 import by.javatr.library.exception.dao.DAOBookLogicException;
 import by.javatr.library.exception.dao.DAOEmptyDataException;
 import by.javatr.library.exception.dao.DAOException;
-import by.javatr.library.exception.FileParserException;
+import by.javatr.library.exception.WriteFileException;
 import by.javatr.library.exception.ReadFileException;
 import by.javatr.library.exception.dao.DAOFileParserException;
 import by.javatr.library.parser.ReadFileManager;
@@ -79,7 +79,7 @@ public class FileBookDAO implements BookDAO {
 
         try {
             WriteFileManager.writeToFile(book, FILE, true);
-        } catch (FileParserException ex) {
+        } catch (WriteFileException ex) {
             throw new DAOFileParserException("Writing file caused an error");
         }
     }
@@ -100,7 +100,7 @@ public class FileBookDAO implements BookDAO {
             }
             try {
                 WriteFileManager.writeToFile(books, FILE);
-            } catch (FileParserException ex) {
+            } catch (WriteFileException ex) {
                 throw new DAOFileParserException("Writing file caused an error");
             }
         }

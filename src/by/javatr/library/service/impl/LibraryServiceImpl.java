@@ -12,8 +12,8 @@ import java.util.List;
 
 public class LibraryServiceImpl implements LibraryService {
 
-    DAOFactory daoFactory = DAOFactory.getInstance();
-    BookDAO bookDAO = daoFactory.getBookDAO();
+    private DAOFactory daoFactory = DAOFactory.getInstance();
+    private BookDAO bookDAO = daoFactory.getBookDAO();
 
     @Override
     public void addNewBook(String authorName, String authorSurname, String bookName, int year, String description) throws ServiceException {
@@ -45,7 +45,7 @@ public class LibraryServiceImpl implements LibraryService {
         try {
             bookDAO.save(book);
         } catch (DAOException ex) {
-            throw new ServiceAddBookException("Writing file caused an error.");
+            throw new ServiceAddBookException("Writing file caused an error.",ex);
         }
 
     }
@@ -56,7 +56,7 @@ public class LibraryServiceImpl implements LibraryService {
         try {
             return bookDAO.getAll();
         } catch (DAOException e) {
-            throw new ServiceGetAllBookException("Impossible action");
+            throw new ServiceGetAllBookException("Impossible action",e);
         }
     }
 
@@ -70,7 +70,7 @@ public class LibraryServiceImpl implements LibraryService {
             }
 
         } catch (DAOException ex) {
-            throw new ServiceGetBookByAuthorSurnameException("Impossible to get data");
+            throw new ServiceGetBookByAuthorSurnameException("Impossible to get data",ex);
         }
         return books;
     }
@@ -81,7 +81,7 @@ public class LibraryServiceImpl implements LibraryService {
         try {
             bookDAO.remove(id);
         } catch (DAOException e) {
-            throw new ServiceRemoveBookException("Impossible to remove.");
+            throw new ServiceRemoveBookException("Impossible to remove.",e);
         }
     }
 }

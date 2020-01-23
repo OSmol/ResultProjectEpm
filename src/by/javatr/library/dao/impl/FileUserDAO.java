@@ -46,7 +46,7 @@ public class FileUserDAO implements UserDAO {
         try {
             WriteFileManager.writeToFile(users, FILE);
 
-        } catch (FileParserException e) {
+        } catch (WriteFileException e) {
             throw new DAOFileParserException("Writing file caused an error.");
         }
     }
@@ -103,7 +103,7 @@ public class FileUserDAO implements UserDAO {
         try {
             WriteFileManager.writeToFile(user, FILE, true);
 
-        } catch (FileParserException e) {
+        } catch (WriteFileException e) {
             throw new DAOFileParserException("Writing file caused an error.");
         }
     }

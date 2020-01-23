@@ -1,6 +1,6 @@
 package by.javatr.library.parser;
 
-import by.javatr.library.exception.FileParserException;
+import by.javatr.library.exception.WriteFileException;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -11,18 +11,18 @@ public class WriteFileManager {
 
     private static Gson gson = new Gson();
 
-    public static void writeToFile(Serializable obj, File file, boolean append) throws FileParserException {
+    public static void writeToFile(Serializable obj, File file, boolean append) throws WriteFileException {
 
         try (FileWriter fileWriter = new FileWriter(file, append)) {
             fileWriter.write(gson.toJson(obj));
             fileWriter.write("\n");
         } catch (IOException ex) {
-            throw new FileParserException("FileParserException in write method.");
+            throw new WriteFileException("FileParserException in write method.",ex);
         }
 
     }
 
-    public static void writeToFile(List list, File file) throws FileParserException {
+    public static void writeToFile(List list, File file) throws WriteFileException {
 
         try (FileWriter fileWriter = new FileWriter(file)) {
 
@@ -33,7 +33,7 @@ public class WriteFileManager {
             }
 
         } catch (IOException ex) {
-            throw new FileParserException("FileParserException in write method.");
+            throw new WriteFileException("FileParserException in write method.",ex);
         }
 
     }

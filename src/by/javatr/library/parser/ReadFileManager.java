@@ -21,9 +21,9 @@ public class ReadFileManager {
                 list.add(s);
             }
         } catch (FileNotFoundException ex) {
-            throw new ReadFileException("File not found.");
+            throw new ReadFileException("File not found.",ex);
         } catch (IOException e) {
-            throw new ReadFileException("ReaFileException in read method.");
+            throw new ReadFileException("ReaFileException in read method.",e);
         }
 
         return list;
