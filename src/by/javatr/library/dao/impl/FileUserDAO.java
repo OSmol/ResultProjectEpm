@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FileUserDAO implements UserDAO {
 
-    private final static File FILE = new File("user.jsonl");
+    private final static File FILE = new File("resources/user.jsonl");
 
 
     public User getUserByLogin(String login) throws DAOException {

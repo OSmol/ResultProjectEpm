@@ -21,7 +21,7 @@ import java.util.List;
 
 public class FileBookDAO implements BookDAO {
 
-    private final File FILE = new File("library.jsonl");
+    private final File FILE = new File("resources/library.jsonl");
 
     public List<Book> getBookByAuthorSurname(String authorSurname) throws DAOException {
 

@@ -41,7 +41,7 @@ public class Runner {
 
                 Printer.printExecutiveResponse(response);
 
-                if (response.getStatus()&&flag!=true) {
+                if (response.getStatus()&&!flag) {
                     System.out.println(controller.getMenu());
                     action = DataScanner.enterIntFromConsole();
 
@@ -50,8 +50,6 @@ public class Runner {
 
             }
             flag = false;
-
-
 
         }
     }
