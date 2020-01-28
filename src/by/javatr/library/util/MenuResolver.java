@@ -1,9 +1,8 @@
-package by.javatr.library.runner;
+package by.javatr.library.util;
 
 import by.javatr.library.bean.User;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.util.Role;
 import by.javatr.library.util.action.CommandName;
 
 

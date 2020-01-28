@@ -3,17 +3,16 @@ package by.javatr.library.runner;
 import by.javatr.library.scanner.DataScanner;
 import by.javatr.library.util.Request;
 import by.javatr.library.util.Response;
-import java.util.HashMap;
 import java.util.Map;
 
 
-public class Printer {
+public class ParameterResolver {
 
 
-    public static void printRespond(Response response, Request request) {
+    public static void printResponse(Response response, Request request) {
 
         if (response.getStatus()) {
-            HashMap<String, String> params=response.getParameters();
+            Map<String, String> params=response.getParameters();
             String param;
             for (Map.Entry<String,String> entry :params.entrySet()) {
                 System.out.println(entry.getKey() + ": ");
@@ -24,8 +23,8 @@ public class Printer {
     }
 
     public static void printExecutiveResponse(Response response) {
-
         System.out.println(response.getParameters().get("message"));
+        response.setStatus(true);
     }
 }
 

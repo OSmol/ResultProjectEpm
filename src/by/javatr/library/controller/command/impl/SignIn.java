@@ -6,7 +6,8 @@ import by.javatr.library.exception.service.ServiceException;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
-import java.util.LinkedHashMap;
+
+import java.util.Map;
 
 public class SignIn implements Command {
 
@@ -22,7 +23,7 @@ public class SignIn implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String, String> parameters) {
+    public Response execute(Map<String, String> parameters) {
         String login = parameters.get("login");
         String password = parameters.get("password");
         Response response=new Response();
@@ -37,8 +38,7 @@ public class SignIn implements Command {
             response.addParameter("userId",String.valueOf(user.getId()));
 
         } catch (ServiceException e) {
-            response.setStatus(false);
-            response.addParameter("message","Error during login procedure");
+            return getUnsuccessfulResponse("Error during login procedure");
         }
         return response;
     }

@@ -8,9 +8,8 @@ import by.javatr.library.service.ClientService;
 import by.javatr.library.service.LibraryService;
 import by.javatr.library.util.Response;
 import by.javatr.library.util.Role;
-
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FindBook implements Command {
 
@@ -28,7 +27,7 @@ public class FindBook implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String,String> request) {
+    public Response execute(Map<String,String> request) {
 
         String authorSurname =request.get("authorSurname");
 
@@ -56,9 +55,7 @@ public class FindBook implements Command {
             response.setStatus(true);
 
         } catch (ServiceException e) {
-            response=new Response();
-            response.addParameter("message","Error during find book procedure");
-            response.setStatus(false);
+          return getUnsuccessfulResponse("We wasn't able to find the book.");
         }
         return response;
     }

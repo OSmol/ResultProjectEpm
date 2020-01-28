@@ -5,7 +5,7 @@ import by.javatr.library.exception.service.ServiceException;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SignOut implements Command {
 
@@ -21,7 +21,7 @@ public class SignOut implements Command {
 
 //todo
     @Override
-    public Response execute(LinkedHashMap<String,String> request) {
+    public Response execute(Map<String,String> request) {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = serviceFactory.getClientService();
@@ -33,9 +33,7 @@ public class SignOut implements Command {
             response.setStatus(true);
 
         } catch (ServiceException e) {
-            response=new Response();
-            response.addParameter("message","Error during sign out procedure");
-            response.setStatus(false);
+            return getUnsuccessfulResponse("Error during sign out procedure");
         }
         return response;
     }

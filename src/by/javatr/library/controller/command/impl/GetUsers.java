@@ -6,8 +6,8 @@ import by.javatr.library.exception.service.ServiceException;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GetUsers implements Command {
 
@@ -21,7 +21,7 @@ public class GetUsers implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String,String> request){
+    public Response execute(Map<String,String> request){
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = serviceFactory.getClientService();
@@ -47,9 +47,7 @@ public class GetUsers implements Command {
             response.setStatus(true);
 
         } catch (ServiceException e) {
-            response=new Response();
-            response.addParameter("message","Error during get users procedure");
-            response.setStatus(false);
+            return getUnsuccessfulResponse("We wasn't able to show all users.");
         }
         return response;
     }

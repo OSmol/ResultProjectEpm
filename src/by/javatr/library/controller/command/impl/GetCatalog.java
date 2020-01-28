@@ -8,8 +8,8 @@ import by.javatr.library.service.ClientService;
 import by.javatr.library.service.LibraryService;
 import by.javatr.library.util.Response;
 import by.javatr.library.util.Role;
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GetCatalog implements Command {
 
@@ -25,7 +25,7 @@ public class GetCatalog implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String,String> request) {
+    public Response execute(Map<String,String> request) {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         LibraryService libraryService=serviceFactory.getLibraryService();
@@ -51,9 +51,7 @@ public class GetCatalog implements Command {
             response.setStatus(true);
 
         } catch (ServiceException e) {
-            response=new Response();
-            response.addParameter("message","Error during get catalog procedure");
-            response.setStatus(false);
+           return getUnsuccessfulResponse("We wasn't able to show catalog now. Try again a little bit later.");
         }
         return response;
     }

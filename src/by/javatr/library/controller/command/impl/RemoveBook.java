@@ -7,7 +7,7 @@ import by.javatr.library.service.LibraryService;
 import by.javatr.library.util.Response;
 import by.javatr.library.util.action.CommandName;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class RemoveBook implements Command {
 
@@ -15,30 +15,35 @@ public class RemoveBook implements Command {
 
     @Override
     public Response checkParameters() {
-        response=new Response();
-        response.addParameter("id",null);
+        response = new Response();
+        response.addParameter("id", null);
         response.setCommandName(CommandName.GET_CATALOG.toString());
         response.setStatus(true);
         return response;
     }
 
     @Override
-    public Response execute(LinkedHashMap<String,String> request) {
-        int id = Integer.parseInt(request.get("id"));
+    public Response execute(Map<String, String> request) {
+        int id=0;
+        response = new Response();
+        try {
+            id = Integer.parseInt(request.get("id"));
+        } catch (NumberFormatException ex) {
+            return getUnsuccessfulResponse("We wasn't able to remove book with such id.");
+        }
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         LibraryService libraryService = serviceFactory.getLibraryService();
         try {
-            response=new Response();
+            response = new Response();
             libraryService.removeBook(id);
-            response.addParameter("message","Book is removed.");
+            response.addParameter("message", "Book is removed.");
             response.setStatus(true);
 
         } catch (ServiceException e) {
-            response = new Response();
-            response.addParameter("message","Error during remove book procedure");
-            response.setStatus(false);
+            return getUnsuccessfulResponse("We wasn't able to remove book.");
         }
         return response;
     }
+
 }

@@ -15,7 +15,6 @@ public final class CommandProvider {
         repository.put(CommandName.REGISTRATION, new Registration());
         repository.put(CommandName.ADD_BOOK, new AddBook());
         repository.put(CommandName.SIGN_OUT, new SignOut());
-        repository.put(CommandName.ADD_USER,new AddBook());
         repository.put(CommandName.FIND_BOOK,new FindBook());
         repository.put(CommandName.GET_CATALOG, new GetCatalog());
         repository.put(CommandName.REMOVE_BOOK, new RemoveBook());

@@ -1,13 +1,11 @@
 package by.javatr.library.util;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Request {
 
     private int command;
-    private LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+    private Map<String, String> parameters = new LinkedHashMap<>();
 
     public int getCommand() {
         return command;
@@ -21,8 +19,8 @@ public class Request {
         parameters.put(key, value);
     }
 
-    public LinkedHashMap<String, String> getParameters() {
-        return parameters;
+    public Map<String, String> getParameters() {
+        return Collections.unmodifiableMap(parameters);
     }
 
     @Override

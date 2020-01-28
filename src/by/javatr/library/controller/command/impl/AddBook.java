@@ -5,7 +5,8 @@ import by.javatr.library.exception.service.ServiceException;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.LibraryService;
 import by.javatr.library.util.Response;
-import java.util.LinkedHashMap;
+
+import java.util.Map;
 
 public class AddBook implements Command {
 
@@ -26,11 +27,19 @@ public class AddBook implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String, String> request) {
+    public Response execute(Map<String, String> request) {
         String bookName = request.get("bookName");
         String authorName = request.get("authorName");
         String authorSurname = request.get("authorSurname");
-        int year = Integer.parseInt(request.get("year"));
+
+        int year = 0;
+        response = new Response();
+        try {
+            year = Integer.parseInt(request.get("year"));
+        } catch (NumberFormatException ex) {
+            return getUnsuccessfulResponse("Year is invalid.");
+        }
+
         String description = request.get("description");
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -42,10 +51,11 @@ public class AddBook implements Command {
             response.setStatus(true);
 
         } catch (ServiceException e) {
-
-            response.addParameter("message", "Error during add book procedure");
-            response.setStatus(false);
+            return getUnsuccessfulResponse("We wasn't able to add book.");
         }
         return response;
     }
+
+
+
 }

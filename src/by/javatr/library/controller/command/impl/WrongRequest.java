@@ -2,7 +2,7 @@ package by.javatr.library.controller.command.impl;
 
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.util.Response;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class WrongRequest implements Command {
 
@@ -16,11 +16,9 @@ public class WrongRequest implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String, String> parameters) {
-        response=new Response();
-        response.addParameter("message","Your request doesn't exist.");
+    public Response execute(Map<String, String> parameters) {
+        response=getUnsuccessfulResponse("Your request doesn't exist.");
         response.setStatus(true);
         return response;
-
     }
 }

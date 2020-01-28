@@ -80,6 +80,8 @@ public class ClientServiceImpl implements ClientService {
             throw new ServiceUserLogicException("Year is incorrect");
 
         }
+
+
         User user = new User();
         user.setName(name);
         user.setLogin(login);

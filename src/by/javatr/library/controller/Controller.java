@@ -2,8 +2,8 @@ package by.javatr.library.controller;
 
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.factory.ServiceFactory;
-import by.javatr.library.runner.MenuResolver;
 import by.javatr.library.service.ClientService;
+import by.javatr.library.util.MenuResolver;
 import by.javatr.library.util.Request;
 import by.javatr.library.util.Response;
 import by.javatr.library.util.Role;

@@ -6,7 +6,7 @@ import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
 import by.javatr.library.util.action.CommandName;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class RemoveUser implements Command {
 
@@ -22,8 +22,14 @@ public class RemoveUser implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String,String> request){
-        int id=Integer.parseInt(request.get("id"));
+    public Response execute(Map<String,String> request){
+        int id=0;
+        response = new Response();
+        try {
+            id = Integer.parseInt(request.get("id"));
+        } catch (NumberFormatException ex) {
+            return getUnsuccessfulResponse("We wasn't able to remove user with such id.");
+        }
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = serviceFactory.getClientService();
@@ -35,10 +41,9 @@ public class RemoveUser implements Command {
             response.setStatus(true);
 
         } catch (ServiceException e) {
-            response=new Response();
-            response.addParameter("message","Error during remove user procedure");
-            response.setStatus(true);
+            return getUnsuccessfulResponse("We wasn't able to remove user.");
         }
         return null;
     }
-}
+
+  }

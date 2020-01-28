@@ -11,15 +11,13 @@ public class Runner {
     public static void main(String[] args) {
 
         boolean flag = false;
-        boolean flagToExit=true;
         Controller controller = new Controller();
-        while (flagToExit) {
+        while (!flag) {
 
             System.out.println(controller.getMenu());
             int action = DataScanner.enterIntFromConsole();
 
             if(action==CommandName.EXIT.ordinal()){
-                flagToExit=false;
                 flag=true;
             }
 
@@ -38,20 +36,19 @@ public class Runner {
                     Request requestToRemove = new Request();
                     requestToRemove.addParameter("commandName", command);
                     Response responseInner = controller.executeTask(requestToRemove);
-                    Printer.printExecutiveResponse(responseInner);
+                    ParameterResolver.printExecutiveResponse(responseInner);
                 }
-                Printer.printRespond(response, request);
+                ParameterResolver.printResponse(response, request);
 
                 response = controller.executeTask(request);
-                Printer.printExecutiveResponse(response);
+                ParameterResolver.printExecutiveResponse(response);
 
-                if (response.getStatus()&&!flag) {
+                    if (response.getStatus()&&!flag) {
                     System.out.println(controller.getMenu());
                     action = DataScanner.enterIntFromConsole();
 
                 }
             }
-            flag = false;
 
         }
     }

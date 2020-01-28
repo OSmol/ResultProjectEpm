@@ -6,8 +6,7 @@ import by.javatr.library.exception.service.ServiceException;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
-
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Registration implements Command {
 
@@ -25,11 +24,19 @@ public class Registration implements Command {
     }
 
     @Override
-    public Response execute(LinkedHashMap<String, String> request) {
+    public Response execute(Map<String, String> request) {
         String name = request.get("name");
         String login = request.get("login");
         String password = request.get("password");
-        int year = Integer.parseInt(request.get("year"));
+
+        int year = 0;
+        response = new Response();
+        try {
+            year = Integer.parseInt(request.get("year"));
+        } catch (NumberFormatException ex) {
+            return getUnsuccessfulResponse("Year is invalid.");
+        }
+
         response = new Response();
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = serviceFactory.getClientService();
@@ -39,10 +46,8 @@ public class Registration implements Command {
             response.addParameter("userId", String.valueOf(user.getId()));
             response.setStatus(true);
 
-
-
         } catch (ServiceException e) {
-            response.addParameter("message", "Error during registration procedure");
+            return getUnsuccessfulResponse("Error during registration procedure");
         }
         return response;
     }

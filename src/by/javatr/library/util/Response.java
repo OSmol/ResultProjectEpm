@@ -1,16 +1,13 @@
 package by.javatr.library.util;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class Response {
 
     private boolean status;
     private String commandName;
-    private LinkedHashMap<String,String > parameters=new LinkedHashMap<>();
+    private Map<String, String> parameters = new LinkedHashMap<>();
 
 
     public String getCommandName() {
@@ -29,12 +26,12 @@ public class Response {
         this.status = status;
     }
 
-    public void addParameter(String key, String value){
-        parameters.put(key,value);
+    public void addParameter(String key, String value) {
+        parameters.put(key, value);
     }
 
-    public HashMap<String, String> getParameters() {
-        return parameters;
+    public Map<String, String> getParameters() {
+        return Collections.unmodifiableMap(parameters);
     }
 
 
@@ -43,7 +40,7 @@ public class Response {
         int prime = 31;
         int result = 1;
         result = result * prime + Boolean.hashCode(status);
-        result=result*prime+(commandName==null?0:1);
+        result = result * prime + (commandName == null ? 0 : 1);
         result = result * prime + parameters.hashCode();
         return result;
     }
@@ -53,7 +50,7 @@ public class Response {
         if (obj == this) return true;
         if (obj.getClass() == getClass()) return false;
         Response other = (Response) obj;
-        if(this.status!=other.status)return false;
+        if (this.status != other.status) return false;
         if (this.commandName.equals(other.commandName)) return false;
         if (this.parameters != null) {
             if (other.parameters == null) return false;
@@ -77,7 +74,7 @@ public class Response {
         return getClass().getName() + '@'
                 + "status=" + status
                 + ", commandName=" + commandName
-                +", parameters="+sb;
+                + ", parameters=" + sb;
     }
 
 }
