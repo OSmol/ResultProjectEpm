@@ -41,7 +41,7 @@ public class Response {
         int result = 1;
         result = result * prime + Boolean.hashCode(status);
         result = result * prime + (commandName == null ? 0 : 1);
-        result = result * prime + parameters.hashCode();
+        result = result * prime + (parameters==null?0:parameters.hashCode());
         return result;
     }
 

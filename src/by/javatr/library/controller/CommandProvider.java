@@ -2,7 +2,7 @@ package by.javatr.library.controller;
 
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.controller.command.impl.*;
-import by.javatr.library.util.action.CommandName;
+import by.javatr.library.controller.command.CommandName;
 import java.util.HashMap;
 import java.util.Map;
 

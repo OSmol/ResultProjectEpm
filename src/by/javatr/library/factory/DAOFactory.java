@@ -1,6 +1,5 @@
 package by.javatr.library.factory;
 
-
 import by.javatr.library.dao.BookDAO;
 import by.javatr.library.dao.UserDAO;
 import by.javatr.library.dao.impl.FileBookDAO;

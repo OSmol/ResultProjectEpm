@@ -3,7 +3,7 @@ package by.javatr.library.util;
 import by.javatr.library.bean.User;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.util.action.CommandName;
+import by.javatr.library.controller.command.CommandName;
 
 
 public class MenuResolver {

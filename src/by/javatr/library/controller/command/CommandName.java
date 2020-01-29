@@ -1,4 +1,4 @@
-package by.javatr.library.util.action;
+package by.javatr.library.controller.command;
 
 public enum CommandName {
 

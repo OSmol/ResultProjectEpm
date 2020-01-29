@@ -28,7 +28,7 @@ public class Request {
         int prime = 31;
         int result = 1;
         result = result * prime + command;
-        result = result * prime + parameters.hashCode();
+        result = result * prime + (parameters==null?0:parameters.hashCode());
         return result;
     }
 

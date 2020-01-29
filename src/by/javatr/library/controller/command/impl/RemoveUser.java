@@ -5,7 +5,7 @@ import by.javatr.library.exception.service.ServiceException;
 import by.javatr.library.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
-import by.javatr.library.util.action.CommandName;
+import by.javatr.library.controller.command.CommandName;
 import java.util.Map;
 
 public class RemoveUser implements Command {

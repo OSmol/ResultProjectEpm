@@ -7,7 +7,7 @@ import by.javatr.library.util.MenuResolver;
 import by.javatr.library.util.Request;
 import by.javatr.library.util.Response;
 import by.javatr.library.util.Role;
-import by.javatr.library.util.action.CommandName;
+import by.javatr.library.controller.command.CommandName;
 
 public class Controller {
 
