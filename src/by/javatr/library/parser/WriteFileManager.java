@@ -22,7 +22,7 @@ public class WriteFileManager {
 
     }
 
-    public static void writeToFile(List list, File file) throws WriteFileException {
+    public static void writeToFile(List<? extends Serializable> list, File file) throws WriteFileException {
 
         try (FileWriter fileWriter = new FileWriter(file)) {
 

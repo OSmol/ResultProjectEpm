@@ -43,7 +43,7 @@ public class RemoveUser implements Command {
         } catch (ServiceException e) {
             return getUnsuccessfulResponse("We wasn't able to remove user.");
         }
-        return null;
+        return response;
     }
 
   }

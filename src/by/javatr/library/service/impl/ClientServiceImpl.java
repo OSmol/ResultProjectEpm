@@ -78,7 +78,6 @@ public class ClientServiceImpl implements ClientService {
 
         if (!UserValidator.validateYear(year)) {
             throw new ServiceUserLogicException("Year is incorrect");
-
         }
 
 
