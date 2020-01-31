@@ -2,12 +2,12 @@ package by.javatr.library.dao.impl;
 
 import by.javatr.library.bean.Book;
 import by.javatr.library.dao.BookDAO;
-import by.javatr.library.exception.dao.DAOBookLogicException;
-import by.javatr.library.exception.dao.DAOEmptyDataException;
-import by.javatr.library.exception.dao.DAOException;
-import by.javatr.library.exception.WriteFileException;
-import by.javatr.library.exception.ReadFileException;
-import by.javatr.library.exception.dao.DAOFileParserException;
+import by.javatr.library.dao.exception.DAOBookLogicException;
+import by.javatr.library.dao.exception.DAOEmptyDataException;
+import by.javatr.library.dao.exception.DAOException;
+import by.javatr.library.parser.exception.WriteFileException;
+import by.javatr.library.parser.exception.ReadFileException;
+import by.javatr.library.dao.exception.DAOFileParserException;
 import by.javatr.library.parser.ReadFileManager;
 import by.javatr.library.parser.WriteFileManager;
 import by.javatr.library.validator.BookValidator;

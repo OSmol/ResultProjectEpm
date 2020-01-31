@@ -1,4 +1,4 @@
-package by.javatr.library.exception;
+package by.javatr.library.parser.exception;
 
 public class ReadFileException extends Exception{
 

@@ -4,9 +4,9 @@ import by.javatr.library.util.Role;
 import by.javatr.library.util.Status;
 import by.javatr.library.bean.User;
 import by.javatr.library.dao.UserDAO;
-import by.javatr.library.exception.dao.DAOException;
-import by.javatr.library.exception.service.*;
-import by.javatr.library.factory.DAOFactory;
+import by.javatr.library.dao.exception.DAOException;
+import by.javatr.library.service.exception.*;
+import by.javatr.library.dao.factory.DAOFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.validator.UserValidator;
 

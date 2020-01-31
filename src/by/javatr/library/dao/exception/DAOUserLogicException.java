@@ -1,4 +1,4 @@
-package by.javatr.library.exception.dao;
+package by.javatr.library.dao.exception;
 
 public class DAOUserLogicException extends DAOException{
 

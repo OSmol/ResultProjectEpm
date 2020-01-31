@@ -1,7 +1,7 @@
 package by.javatr.library.service;
 
 import by.javatr.library.bean.User;
-import by.javatr.library.exception.service.ServiceException;
+import by.javatr.library.service.exception.ServiceException;
 
 import java.util.List;
 

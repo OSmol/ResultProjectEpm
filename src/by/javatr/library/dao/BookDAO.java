@@ -2,7 +2,7 @@ package by.javatr.library.dao;
 
 
 import by.javatr.library.bean.Book;
-import by.javatr.library.exception.dao.DAOException;
+import by.javatr.library.dao.exception.DAOException;
 
 import java.util.List;
 

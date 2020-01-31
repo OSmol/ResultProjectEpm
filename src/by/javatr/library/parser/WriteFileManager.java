@@ -1,6 +1,6 @@
 package by.javatr.library.parser;
 
-import by.javatr.library.exception.WriteFileException;
+import by.javatr.library.parser.exception.WriteFileException;
 import com.google.gson.Gson;
 
 import java.io.*;

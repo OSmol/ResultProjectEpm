@@ -1,4 +1,4 @@
-package by.javatr.library.factory;
+package by.javatr.library.dao.factory;
 
 import by.javatr.library.dao.BookDAO;
 import by.javatr.library.dao.UserDAO;

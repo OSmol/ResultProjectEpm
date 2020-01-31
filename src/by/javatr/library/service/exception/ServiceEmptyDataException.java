@@ -1,4 +1,4 @@
-package by.javatr.library.exception.service;
+package by.javatr.library.service.exception;
 
 public class ServiceEmptyDataException extends ServiceException {
 

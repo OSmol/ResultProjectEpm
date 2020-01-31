@@ -1,4 +1,4 @@
-package by.javatr.library.exception.service;
+package by.javatr.library.service.exception;
 
 public class ServiceBookLogicException extends ServiceException{
 

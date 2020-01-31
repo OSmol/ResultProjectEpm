@@ -2,8 +2,8 @@ package by.javatr.library.controller.command.impl;
 
 import by.javatr.library.bean.User;
 import by.javatr.library.controller.command.Command;
-import by.javatr.library.exception.service.ServiceException;
-import by.javatr.library.factory.ServiceFactory;
+import by.javatr.library.service.exception.ServiceException;
+import by.javatr.library.service.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.util.Response;
 
