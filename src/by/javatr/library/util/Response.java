@@ -52,8 +52,8 @@ public class Response {
         Response other = (Response) obj;
         if (this.status != other.status) return false;
         if (this.commandName.equals(other.commandName)) return false;
-        if (this.parameters != null) {
-            if (other.parameters == null) return false;
+        if (this.parameters == null) {
+            if (other.parameters != null) return false;
         } else {
             if (!this.parameters.equals(other.parameters)) return false;
         }

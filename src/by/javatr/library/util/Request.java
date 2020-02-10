@@ -38,8 +38,8 @@ public class Request {
         if (obj.getClass() == getClass()) return false;
         Request other = (Request) obj;
         if (this.command != other.command) return false;
-        if (this.parameters != null) {
-            if (other.parameters == null) return false;
+        if (this.parameters == null) {
+            if (other.parameters != null) return false;
         } else {
             if (!this.parameters.equals(other.parameters)) return false;
         }
