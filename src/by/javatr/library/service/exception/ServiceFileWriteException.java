@@ -1,7 +1,11 @@
 package by.javatr.library.service.exception;
 
-public class ServiceFileWriteException extends ServiceException {
+import java.io.Serializable;
 
+public class ServiceFileWriteException extends ServiceException implements Serializable {
+
+
+    private static final long serialVersionUID = 6414581890703848730L;
 
     public ServiceFileWriteException() {
     }

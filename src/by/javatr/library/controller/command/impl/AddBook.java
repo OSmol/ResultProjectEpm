@@ -4,18 +4,17 @@ import by.javatr.library.controller.command.Command;
 import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 import by.javatr.library.service.LibraryService;
-import by.javatr.library.util.Response;
+import by.javatr.library.dao.util.Response;
 
 import java.util.Map;
 
 public class AddBook implements Command {
 
 
-    Response response;
 
     @Override
     public Response checkParameters() {
-        response = new Response();
+        Response response = new Response();
         response.setStatus(true);
         response.addParameter("bookName", null);
         response.addParameter("authorName", null);
@@ -33,7 +32,7 @@ public class AddBook implements Command {
         String authorSurname = request.get("authorSurname");
 
         int year = 0;
-        response = new Response();
+        Response response;
         try {
             year = Integer.parseInt(request.get("year"));
         } catch (NumberFormatException ex) {

@@ -1,7 +1,11 @@
 package by.javatr.library.service.exception;
 
-public class ServiceGetBookByAuthorSurnameException extends ServiceException {
+import java.io.Serializable;
 
+public class ServiceGetBookByAuthorSurnameException extends ServiceException implements Serializable {
+
+
+    private static final long serialVersionUID = 6047426967979324269L;
 
     public ServiceGetBookByAuthorSurnameException() {
     }

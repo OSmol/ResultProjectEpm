@@ -1,12 +1,12 @@
 package by.javatr.library.service.impl;
 
-import by.javatr.library.bean.Book;
+import by.javatr.library.dao.bean.Book;
 import by.javatr.library.dao.BookDAO;
 import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.exception.*;
 import by.javatr.library.dao.factory.DAOFactory;
 import by.javatr.library.service.LibraryService;
-import by.javatr.library.validator.BookValidator;
+import by.javatr.library.service.validator.BookValidator;
 
 import java.util.List;
 

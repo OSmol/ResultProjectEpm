@@ -1,9 +1,9 @@
 package by.javatr.library.runner;
 
 import by.javatr.library.controller.Controller;
-import by.javatr.library.scanner.DataScanner;
-import by.javatr.library.util.Request;
-import by.javatr.library.util.Response;
+import by.javatr.library.runner.scanner.DataScanner;
+import by.javatr.library.dao.util.Request;
+import by.javatr.library.dao.util.Response;
 import by.javatr.library.controller.command.CommandName;
 
 public class Runner {

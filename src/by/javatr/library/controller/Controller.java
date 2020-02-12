@@ -3,10 +3,10 @@ package by.javatr.library.controller;
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.service.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.util.MenuResolver;
-import by.javatr.library.util.Request;
-import by.javatr.library.util.Response;
-import by.javatr.library.util.Role;
+import by.javatr.library.service.util.MenuResolver;
+import by.javatr.library.dao.util.Request;
+import by.javatr.library.dao.util.Response;
+import by.javatr.library.dao.util.Role;
 import by.javatr.library.controller.command.CommandName;
 
 public class Controller {

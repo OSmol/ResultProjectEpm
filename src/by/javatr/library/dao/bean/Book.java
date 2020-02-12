@@ -1,4 +1,4 @@
-package by.javatr.library.bean;
+package by.javatr.library.dao.bean;
 
 import java.io.Serializable;
 

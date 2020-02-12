@@ -1,7 +1,11 @@
 package by.javatr.library.service.exception;
 
-public class ServiceEmptyDataException extends ServiceException {
+import java.io.Serializable;
 
+public class ServiceEmptyDataException extends ServiceException implements Serializable {
+
+
+    private static final long serialVersionUID = -1914473833829376547L;
 
     public ServiceEmptyDataException() {
     }

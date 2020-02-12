@@ -1,13 +1,13 @@
 package by.javatr.library.dao.impl;
 
-import by.javatr.library.util.Status;
-import by.javatr.library.bean.User;
+import by.javatr.library.dao.util.Status;
+import by.javatr.library.dao.bean.User;
 import by.javatr.library.dao.UserDAO;
-import by.javatr.library.parser.exception.*;
+import by.javatr.library.dao.parser.exception.*;
 import by.javatr.library.dao.exception.*;
-import by.javatr.library.parser.ReadFileManager;
-import by.javatr.library.parser.WriteFileManager;
-import by.javatr.library.validator.UserValidator;
+import by.javatr.library.dao.parser.ReadFileManager;
+import by.javatr.library.dao.parser.WriteFileManager;
+import by.javatr.library.service.validator.UserValidator;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -18,7 +18,9 @@ import java.util.List;
 
 public class FileUserDAO implements UserDAO {
 
-    private final static File FILE = new File("resources/user.jsonl");
+    private static final String FILE_USER_PATH="resources/user.jsonl";
+
+    private final static File FILE = new File(FILE_USER_PATH);
 
 
     public User getUserByLogin(String login) throws DAOException {

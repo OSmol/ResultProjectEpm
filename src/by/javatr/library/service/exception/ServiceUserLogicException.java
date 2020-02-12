@@ -1,7 +1,11 @@
 package by.javatr.library.service.exception;
 
-public class ServiceUserLogicException extends ServiceException {
+import java.io.Serializable;
 
+public class ServiceUserLogicException extends ServiceException implements Serializable {
+
+
+    private static final long serialVersionUID = 7516716884582149568L;
 
     public ServiceUserLogicException() {
     }

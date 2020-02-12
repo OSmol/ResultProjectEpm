@@ -1,7 +1,11 @@
 package by.javatr.library.service.exception;
 
-public class ServiceUserNotFoundException extends ServiceException {
+import java.io.Serializable;
 
+public class ServiceUserNotFoundException extends ServiceException implements Serializable {
+
+
+    private static final long serialVersionUID = -8481991095164029948L;
 
     public ServiceUserNotFoundException() {
     }

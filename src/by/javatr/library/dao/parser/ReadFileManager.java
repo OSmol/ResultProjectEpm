@@ -1,7 +1,6 @@
-package by.javatr.library.parser;
+package by.javatr.library.dao.parser;
 
-import by.javatr.library.parser.exception.ReadFileException;
-import com.google.gson.Gson;
+import by.javatr.library.dao.parser.exception.ReadFileException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.List;
 
 public class ReadFileManager {
 
-    private static Gson gson = new Gson();
 
     public static List<String> readFile(File file) throws ReadFileException {
 

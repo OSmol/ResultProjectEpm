@@ -1,7 +1,7 @@
-package by.javatr.library.bean;
+package by.javatr.library.dao.bean;
 
-import by.javatr.library.util.Role;
-import by.javatr.library.util.Status;
+import by.javatr.library.dao.util.Role;
+import by.javatr.library.dao.util.Status;
 
 import java.io.Serializable;
 

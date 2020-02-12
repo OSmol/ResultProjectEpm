@@ -1,20 +1,19 @@
 package by.javatr.library.controller.command.impl;
 
-import by.javatr.library.bean.User;
+import by.javatr.library.dao.bean.User;
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.util.Response;
+import by.javatr.library.dao.util.Response;
 import java.util.Map;
 
 public class Registration implements Command {
 
-    private Response response;
 
     @Override
     public Response checkParameters() {
-        response = new Response();
+        Response response = new Response();
         response.addParameter("name",null);
         response.addParameter("login",null );
         response.addParameter("password",null);
@@ -30,17 +29,16 @@ public class Registration implements Command {
         String password = request.get("password");
 
         int year = 0;
-        response = new Response();
         try {
             year = Integer.parseInt(request.get("year"));
         } catch (NumberFormatException ex) {
             return getUnsuccessfulResponse("Year is invalid.");
         }
-
-        response = new Response();
+        Response response;
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = serviceFactory.getClientService();
         try {
+            response = new Response();
             User user = clientService.registration(name, login, password, year);
             response.addParameter("message", "Welcome to our library!");
             response.addParameter("userId", String.valueOf(user.getId()));

@@ -1,6 +1,10 @@
 package by.javatr.library.dao.exception;
 
-public class DAOFileParserException extends DAOException{
+import java.io.Serializable;
+
+public class DAOFileParserException extends DAOException implements Serializable {
+
+    private static final long serialVersionUID = -7378232441139234356L;
 
     public DAOFileParserException() {
     }

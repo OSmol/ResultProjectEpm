@@ -1,6 +1,10 @@
 package by.javatr.library.dao.exception;
 
-public class DAOUserNotFoundException extends DAOException{
+import java.io.Serializable;
+
+public class DAOUserNotFoundException extends DAOException implements Serializable {
+
+    private static final long serialVersionUID = 5134213219321323794L;
 
     public DAOUserNotFoundException() {
     }

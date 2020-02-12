@@ -1,21 +1,20 @@
 package by.javatr.library.controller.command.impl;
 
-import by.javatr.library.bean.User;
+import by.javatr.library.dao.bean.User;
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.util.Response;
+import by.javatr.library.dao.util.Response;
 
 import java.util.Map;
 
 public class SignIn implements Command {
 
-    Response response;
 
     @Override
     public Response checkParameters() {
-        response = new Response();
+        Response response = new Response();
         response.setStatus(true);
         response.addParameter("login", null);
         response.addParameter("password", null);

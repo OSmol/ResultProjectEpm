@@ -1,6 +1,6 @@
-package by.javatr.library.parser;
+package by.javatr.library.dao.parser;
 
-import by.javatr.library.parser.exception.WriteFileException;
+import by.javatr.library.dao.parser.exception.WriteFileException;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -9,10 +9,9 @@ import java.util.List;
 
 public class WriteFileManager {
 
-    private static Gson gson = new Gson();
 
     public static void writeToFile(Serializable obj, File file, boolean append) throws WriteFileException {
-
+        Gson gson = new Gson();
         try (FileWriter fileWriter = new FileWriter(file, append)) {
             fileWriter.write(gson.toJson(obj));
             fileWriter.write("\n");
@@ -23,7 +22,7 @@ public class WriteFileManager {
     }
 
     public static void writeToFile(List<? extends Serializable> list, File file) throws WriteFileException {
-
+        Gson gson = new Gson();
         try (FileWriter fileWriter = new FileWriter(file)) {
 
             Iterator iterator = list.iterator();

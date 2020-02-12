@@ -1,7 +1,11 @@
 package by.javatr.library.service.exception;
 
-public class ServiceRemoveBookException extends ServiceException {
+import java.io.Serializable;
 
+public class ServiceRemoveBookException extends ServiceException implements Serializable {
+
+
+    private static final long serialVersionUID = -6733707073355067068L;
 
     public ServiceRemoveBookException() {
     }

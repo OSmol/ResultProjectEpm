@@ -1,16 +1,16 @@
 package by.javatr.library.dao.impl;
 
-import by.javatr.library.bean.Book;
+import by.javatr.library.dao.bean.Book;
 import by.javatr.library.dao.BookDAO;
 import by.javatr.library.dao.exception.DAOBookLogicException;
 import by.javatr.library.dao.exception.DAOEmptyDataException;
 import by.javatr.library.dao.exception.DAOException;
-import by.javatr.library.parser.exception.WriteFileException;
-import by.javatr.library.parser.exception.ReadFileException;
+import by.javatr.library.dao.parser.exception.WriteFileException;
+import by.javatr.library.dao.parser.exception.ReadFileException;
 import by.javatr.library.dao.exception.DAOFileParserException;
-import by.javatr.library.parser.ReadFileManager;
-import by.javatr.library.parser.WriteFileManager;
-import by.javatr.library.validator.BookValidator;
+import by.javatr.library.dao.parser.ReadFileManager;
+import by.javatr.library.dao.parser.WriteFileManager;
+import by.javatr.library.service.validator.BookValidator;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -21,7 +21,8 @@ import java.util.List;
 
 public class FileBookDAO implements BookDAO {
 
-    private final File FILE = new File("resources/library.jsonl");
+    private static final String FILE_BOOK_PATH="resources/library.jsonl";
+    private final File FILE = new File(FILE_BOOK_PATH);
 
     public List<Book> getBookByAuthorSurname(String authorSurname) throws DAOException {
 

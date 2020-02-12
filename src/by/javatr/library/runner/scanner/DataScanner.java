@@ -1,4 +1,4 @@
-package by.javatr.library.scanner;
+package by.javatr.library.runner.scanner;
 
 import java.util.Scanner;
 

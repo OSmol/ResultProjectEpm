@@ -4,17 +4,16 @@ import by.javatr.library.controller.command.Command;
 import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.util.Response;
+import by.javatr.library.dao.util.Response;
 import by.javatr.library.controller.command.CommandName;
 import java.util.Map;
 
 public class RemoveUser implements Command {
 
-    Response response;
 
     @Override
     public Response checkParameters() {
-        response=new Response();
+        Response response =new Response();
         response.addParameter("id", null);
         response.setCommandName(CommandName.GET_USERS.toString());
         response.setStatus(true);
@@ -24,7 +23,7 @@ public class RemoveUser implements Command {
     @Override
     public Response execute(Map<String,String> request){
         int id=0;
-        response = new Response();
+        Response response;
         try {
             id = Integer.parseInt(request.get("id"));
         } catch (NumberFormatException ex) {

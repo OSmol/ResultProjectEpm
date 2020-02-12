@@ -1,6 +1,10 @@
 package by.javatr.library.dao.exception;
 
-public class DAOEmptyDataException extends DAOException{
+import java.io.Serializable;
+
+public class DAOEmptyDataException extends DAOException implements Serializable {
+
+    private static final long serialVersionUID = -2611656547777572323L;
 
     public DAOEmptyDataException() {
     }

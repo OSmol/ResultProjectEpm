@@ -1,6 +1,6 @@
-package by.javatr.library.validator;
+package by.javatr.library.service.validator;
 
-import by.javatr.library.bean.Book;
+import by.javatr.library.dao.bean.Book;
 
 public class BookValidator {
 
