@@ -1,9 +1,9 @@
 package by.javatr.library.dao;
 
 
+import by.javatr.library.dao.bean.Book;
 import by.javatr.library.dao.exception.DAOException;
 
-import java.awt.print.Book;
 import java.util.List;
 
 public interface BookDAO {
