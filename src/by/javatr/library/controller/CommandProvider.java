@@ -27,13 +27,13 @@ public final class CommandProvider {
         CommandName commandName = null;
         Command command = null;
 
-        try {
             commandName = CommandName.valueOf(name.toUpperCase());
             command = repository.get(commandName);
-        } catch (IllegalArgumentException | NullPointerException ex) {
-            command = repository.get(CommandName.WRONG_REQUEST);
 
-        }
+            if(command==null){
+                command=repository.get(CommandName.WRONG_REQUEST);
+            }
+
         return command;
     }
 }
