@@ -57,7 +57,7 @@ public class FileBookDAO implements BookDAO {
                 books.add(gson.fromJson(book, Book.class));
             }
         } catch (ReadFileException ex) {
-            throw new DAOFileParserException("Reading file caused an error.");
+            throw new DAOFileParserException("Reading file caused an error.");// потерял реальное исключение     throw new DAOFileParserException("Reading file caused an error.", e);
         }
 
         return books;
